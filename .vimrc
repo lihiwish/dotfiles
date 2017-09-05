@@ -109,6 +109,9 @@ if g:plugin_manager == 'plugged'
 	Plug 'bruno-/vim-man'
 	Plug 'klen/python-mode'
 	Plug 'rking/ag.vim'
+	Plug 'itchyny/vim-cursorword'
+	Plug 'mileszs/ack.vim'
+	Plug 'arcticicestudio/nord-vim'
 	call plug#end()
 endif
 
@@ -157,6 +160,14 @@ let g:airline_powerline_fonts = 1
 
 nmap <F8> :TagbarToggle<CR>
 nnoremap <F9> :NERDTreeToggle<CR>
+map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
+
+" let g:ackprg = 'ag --vimgrep --smart-case'
+" cnoreabbrev ag Ack
+" cnoreabbrev aG Ack
+" cnoreabbrev Ag Ack
+" cnoreabbrev AG Ack
+
 
 let g:ctrlp_cache_dir = $HOME.'/.ctrlpcache'
 let g:ctrlp_clear_cache_on_exit = 0
@@ -204,18 +215,23 @@ nnoremap <Tab> <C-W>w
 nnoremap <C-S-A-Right>  :tabnext<CR>
 nnoremap <C-S-A-Left>  :tabprev<CR>
 
-nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
+" nnoremap th  :tabfirst<CR>
+" nnoremap tj  :tabnext<CR>
+" nnoremap tk  :tabprev<CR>
+" nnoremap tl  :tablast<CR>
+" nnoremap tt  :tabedit<Space>
+" nnoremap tn  :tabnext<Space>
 nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
+" nnoremap td  :tabclose<CR>
 " Alternatively use
-" "nnoremap th :tabnext<CR>
-" "nnoremap tl :tabprev<CR>
-" "nnoremap tn :tabnew<CR>
+nnoremap tl :tabnext<CR>
+nnoremap th :tabprev<CR>
+nnoremap tn :tabnew<CR>
+
+
+" map <leader>tn :tabnew<CR>
+" map <leader>tl :tabnext<CR>
+" map <leader>th :tabprevious<CR>
 
 "inoremap <up> <nop>
 "inoremap <down> <nop>
@@ -248,9 +264,6 @@ nnoremap <leader>vc :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") 
 	\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 nnoremap <leader>vx :echo synIDattr(synID(line("."),col("."),1),"name")<CR>
 nmap <leader>m <Plug>(Vman)
-map <leader>tn :tabnew<CR>
-map <leader>tl :tabnext<CR>
-map <leader>th :tabprevious<CR>
 
 " View
 set ruler		" show the cursor position all the time
