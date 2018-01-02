@@ -1,5 +1,6 @@
 " vimrc
 
+let $BASH_ENV = "~/.bash_alias"
 let g:plugin_manager = "plugged"
 
 " Basics
@@ -9,7 +10,6 @@ set noswapfile
 set autoread		" auto read file when changed from outside
 set wrap
 set showbreak=>
-filetype plugin indent on	" Enable file type detection.
 set noerrorbells
 set novisualbell
 set vb t_vb=
@@ -26,13 +26,9 @@ endif
 if !empty($TMUX)
 	let &t_8f="\e[38;2;%ld;%ld;%ldm"
 	let &t_8b="\e[48;2;%ld;%ld;%ldm"
-	"set t_ku=OA
-	"set t_kd=OB
-	"set t_kr=OC
-	"set t_kl=OD
 endif
 
-"Keys:
+" Keys:
 set backspace=indent,eol,start
 map Q gq
 set whichwrap=<,>,h,l
@@ -50,7 +46,6 @@ set wildignore=*.o,*~,*.pyc,*.a,*.so,*.zip,*.rar,*.swp,*/tmp/*,*/vendor/*,*.exe,
 nnoremap <F10> :set invpaste paste?<CR>
 set pastetoggle=<F10>
 set showmode
-
 set clipboard^=unnamedplus
 
 " Folds
@@ -72,6 +67,7 @@ set mat=2		" Tenth of a second to blink matching brackets
 " Indent
 set autoindent
 set smartindent
+filetype plugin indent on	" Enable file type detection.
 set smarttab
 set tabstop=8
 set softtabstop=8
@@ -80,11 +76,12 @@ set noexpandtab
 
 
 " Extensions
+"  curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 if g:plugin_manager == 'pathogen'
 	execute pathogen#infect()
 	execute pathogen#helptags()
 endif
-"
+
 "vim-plug:
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if g:plugin_manager == 'plugged'
@@ -95,82 +92,94 @@ if g:plugin_manager == 'plugged'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'notpratheek/vim-luna'
 	Plug 'scrooloose/nerdtree'
-	"Plug 'crusoexia/vim-monokai'
-	"Plug 'KeitaNakamura/neodark.vim'
 	Plug 'kamwitsta/nordisk'
 	Plug 'tyrannicaltoucan/vim-quantum'
 	Plug 'tpope/vim-fugitive'
-	Plug 'airblade/vim-gitgutter'
 	Plug 'nanotech/jellybeans.vim'
 	Plug 'pangloss/vim-javascript'
 	Plug 'jelera/vim-javascript-syntax'
 	Plug 'scrooloose/syntastic'
 	Plug 'davidhalter/jedi-vim'
 	Plug 'bruno-/vim-man'
-	Plug 'klen/python-mode'
-	Plug 'rking/ag.vim'
+"	Plug 'klen/python-mode'
+"	Plug 'rking/ag.vim'
 	Plug 'itchyny/vim-cursorword'
 	Plug 'mileszs/ack.vim'
 	Plug 'arcticicestudio/nord-vim'
+	Plug 'jnurmine/Zenburn' "Colorscheme that should be better for the eyes`
 	call plug#end()
 endif
 
-let g:pymode_rope = 0
-let g:pymode_doc = 0
-let g:pymode_doc_key = '<leader>pk'
-let g:pymode_lint = 1
-let g:pymode_lint_checkers = ['pyflakes', 'pep8']
-let g:pymode_lint_write = 1
-let g:pymode_virtualenv = 1
-let g:pymode_breakpoint = 1
-let g:pymode_breakpoint_bind = '<leader>pb'
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-let g:pymode_folding = 0
+" python-mode config
+" let g:pymode_rope = 0 " use jedi instead of rope
+" let g:pymode_doc = 0
+" let g:pymode_doc_key = '<leader>pk'
+" let g:pymode_lint = 1
+" let g:pymode_lint_checkers = ['pyflakes', 'pep8']
+" let g:pymode_lint_write = 1
+" let g:pymode_virtualenv = 1
+" let g:pymode_breakpoint = 0
+" let g:pymode_breakpoint_bind = '<leader>pb'
+" let g:pymode_syntax = 1
+" let g:pymode_syntax_all = 1
+" " let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+" " let g:pymode_syntax_space_errors = g:pymode_syntax_all
+" let g:pymode_folding = 0
 
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<C-\\>"
+" jedi-vim config
+let g:jedi#goto_command = "<leader>pd"
+let g:jedi#goto_assignments_command = "<leader>pg"
+let g:jedi#goto_definitions_command = "<leader>pd"
 let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
+let g:jedi#usages_command = "<leader>pn"
 let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>c"
+let g:jedi#rename_command = "<leader>pr"
 
+" nerdtree config
 let g:NERDTreeWinPos = 'right'
 let g:NERDTreeWinSize = 45
+nnoremap <F9> :NERDTreeToggle<CR>
+
+" tagbar config
 let g:tagbar_width = 40
 let g:tagbar_autofocus = 1
 let g:tagbar_compact = 1
 let g:tagbar_sort = 0
-let g:ctrlp_extensions = ['tag', 'buffertag']
-nmap <C-O> :CtrlPBufTagAll<CR>
-nmap <C-L> :CtrlPTag<CR>
 let g:tagbar_ctags_bin = 'ctags'
+nmap <F8> :TagbarToggle<CR>
+
+nmap <C-\> :cs find s <cword><CR>
+
+" ctrlp config
+let g:ctrlp_extensions = ['tag', 'buffertag']
 let g:ctrlp_buftag_ctags_bin = 'ctags'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_root_markers = ['module.conf']
 let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\v[\/](\.(git|hg|svn|cmadmin|lost+found)|(CMpub|linux50))$',
 	\ 'file': '\v\.(exe|so|dll|gif|jpg|jpeg|png|lnk|zip|rar|gz|tar|db)$',
 	\ }
-
-let g:airline_powerline_fonts = 1
-
-nmap <F8> :TagbarToggle<CR>
-nnoremap <F9> :NERDTreeToggle<CR>
-map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR>
-
-" let g:ackprg = 'ag --vimgrep --smart-case'
-" cnoreabbrev ag Ack
-" cnoreabbrev aG Ack
-" cnoreabbrev Ag Ack
-" cnoreabbrev AG Ack
-
-
 let g:ctrlp_cache_dir = $HOME.'/.ctrlpcache'
 let g:ctrlp_clear_cache_on_exit = 0
+let g:ctrlp_extensions = ['tag', 'buffertag']
+nmap <C-O> :CtrlPBufTagAll<CR>
+nmap <C-L> :CtrlPTag<CR>
+
+" airline config
+let g:airline_powerline_fonts = 1
+
+" ag/ack configuration
+" let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack!
+cnoreabbrev aG Ack!
+cnoreabbrev Ag Ack!
+cnoreabbrev AG Ack!
+
+if executable('ag')
+  let g:ackprg = 'agv --vimgrep'
+endif
+
+map <F4> :Ack <cword><cr>
+
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
 if has("cscope")
@@ -181,14 +190,16 @@ if has("cscope")
 		cs add cscope.out
 	endif
 endif
+
+" syntastic config
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-"let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_javascript_checkers = ['eslint']
 
 " Tabs and Windows
 set splitright
@@ -197,11 +208,6 @@ noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-l> <C-W>l
 noremap <C-h> <C-W>h
-
-"noremap <Right> :tabnext<CR>
-"noremap <Left> :tabprevious<CR>
-"noremap <Up> :tabnew<CR>
-"noremap <Down> <nop>
 nnoremap <Tab> <C-W>w
 
 "Tab navigation like Firefox.
@@ -212,43 +218,24 @@ nnoremap <Tab> <C-W>w
 " inoremap <C-tab>   <Esc>:tabnext<CR>i
 " inoremap <C-t>     <Esc>:tabnew<CR>
 
-nnoremap <C-S-A-Right>  :tabnext<CR>
-nnoremap <C-S-A-Left>  :tabprev<CR>
-
-" nnoremap th  :tabfirst<CR>
-" nnoremap tj  :tabnext<CR>
-" nnoremap tk  :tabprev<CR>
-" nnoremap tl  :tablast<CR>
-" nnoremap tt  :tabedit<Space>
-" nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-" nnoremap td  :tabclose<CR>
 " Alternatively use
 nnoremap tl :tabnext<CR>
 nnoremap th :tabprev<CR>
 nnoremap tn :tabnew<CR>
+nnoremap tm  :tabm<Space>
 
-
-" map <leader>tn :tabnew<CR>
-" map <leader>tl :tabnext<CR>
-" map <leader>th :tabprevious<CR>
-
-"inoremap <up> <nop>
-"inoremap <down> <nop>
-"inoremap <left> <nop>
-"inoremap <right> <nop>
-
+" j k move through wrap
 nnoremap j gj
 nnoremap k gk
 
-" Leader
+" Leader Shortcuts
 let mapleader=','
 nnoremap <leader>/ :nohlsearch<CR>
 nnoremap <leader>vr :registers<CR>
 nnoremap <leader>vb :buffers<CR>
 nnoremap <leader>vm :marks<CR>
 nnoremap <leader><leader> :pc<CR>
-nnoremap <leader>ev :tabedit $MYVIMRC<CR>
+nnoremap <leader>ev :tabe $MYVIMRC<CR>
 nnoremap <leader>eb :tabe $HOME/.bashrc<CR>
 nnoremap <leader>ec :tabe $HOME/.cshrc<CR>
 nnoremap <leader>eg :tabe $HOME/.gitconfig<CR>
@@ -276,7 +263,8 @@ syntax enable
 set cursorline
 set list lcs=trail:·,tab:»\ 
 set colorcolumn=80
-"let g:Powerline_symbols = 'fancy'
+
+" Theme and fonts
 set background=dark
 set termguicolors
 if has("gui_running")
@@ -286,36 +274,17 @@ if has("gui_running")
 		set guifont=DejaVu_Sans_Mono_for_Powerline:h10:cANSI
 	endif
 else
-	"let g:solarized_termcolors=256
-	"Only for monokai
-	"set t_Co=256
-
 	"let g:quantum_black=1
 	let g:quantum_italics=1
 	let g:airline_theme='quantum'
 endif
 "let g:solarized_termcolors=256
-"colorscheme solarized
-"colorscheme monokai
-"colorscheme neodark
-"let g:neodark#background='brown' " black, gray or brown
-"colorscheme nordisc
 colorscheme quantum
 
 
-
-" LastCursorPosition
-augroup vimrcEx
-au!
-autocmd FileType text setlocal textwidth=78
-autocmd FileType python call PyTabStop()
-autocmd FileType javascript call JsTabStop()
-autocmd FileType yaml call JsTabStop()
-autocmd FileType json call JsTabStop()
-autocmd FileType ruby call RubyTabStop()
-autocmd FileType c,cpp setlocal cindent cinoptions=g-1
-
 " When editing a file, always jump to the last known cursor position.
+augroup LastCursorPosition
+au!
 autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
 	\	exe "normal g`\"" |
@@ -323,14 +292,20 @@ autocmd BufReadPost *
 
 augroup END
 
-augroup GitCommitMessage
-au!
-autocmd BufRead,BufNewfile,BufEnter COMMIT_EDITMSG setlocal colorcolumn=50
-augroup END
-
 augroup DetectFileTypes
 au!
 autocmd BufRead,BufNewfile Vagrantfile set filetype=ruby
+autocmd FileType text setlocal textwidth=78
+autocmd FileType python call FourSpacesTabStop()
+autocmd FileType javascript call TwoSpacesTabStop()
+autocmd FileType yaml call TwoSpacesTabStop()
+autocmd FileType json call TwoSpacesTabStop()
+autocmd FileType ruby call TwoSpacesTabStop()
+autocmd FileType c,cpp setlocal cindent cinoptions=g-1
+autocmd FileType rst call FourSpacesTabStop()
+autocmd FileType markdown call FourSpacesTabStop()
+autocmd FileType gitcommit setlocal colorcolumn=50
+autocmd FileType dockerfile call FourSpacesTabStop()
 augroup END
 
 " Functions
@@ -361,15 +336,11 @@ function! TabStop(space, expand)
 	endif
 endfunction
 
-function! PyTabStop()
+function! FourSpacesTabStop()
 	call TabStop(4, 1)
 endfunction
 
-function! JsTabStop()
-	call TabStop(2, 1)
-endfunction
-
-function! RubyTabStop()
+function! TwoSpacesTabStop()
 	call TabStop(2, 1)
 endfunction
 
@@ -378,7 +349,4 @@ function! TabTabStop()
 endfunction
 
 set secure
-
-"File config:
-" vim:foldmethod=marker
 
