@@ -33,7 +33,7 @@ export PS1='\[\033[01;32m\]\u\[\033[01;34m\] \w\[\033[01;33m\]$(__git_ps1)\[\033
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-alias config='/usr/bin/git --git-dir=~/.cfg/ --work-tree=~'
+alias config='/usr/bin/git --git-dir=/home/$USER/.cfg/ --work-tree=/home/$USER'
 
 if [ -f ~/.bash_alias ]; then
 . ~/.bash_alias
