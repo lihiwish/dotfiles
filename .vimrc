@@ -5,7 +5,7 @@ let g:plugin_manager = "plugged"
 
 " Basics
 set nocompatible
-set nobackup		" don't save ~ backup files
+set backup		" save  backup files
 set noswapfile
 set autoread		" auto read file when changed from outside
 set wrap
@@ -198,7 +198,8 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_tex_checkers=[]
 " let g:syntastic_check_on_wq = 0
 " let g:syntastic_javascript_checkers = ['eslint']
 
