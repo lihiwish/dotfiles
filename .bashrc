@@ -9,10 +9,10 @@ vssh ()
 { 
 	VM=$1;
 	if [ -z "$2" ]; then
-		vagrant ssh $VM -p -- -l stack -X
+		vagrant ssh $VM -p -- -l stack -Y
 	else
 		host_ip=$(vagrant ssh-config $VM | awk '$1 ~ /^HostName/' | awk '{print $2}')
-		vagrant ssh $VM -p -- -l stack -X -L $2:$host_ip:80
+		vagrant ssh $VM -p -- -l stack -Y -L $2:$host_ip:80
 	fi
 }
 
