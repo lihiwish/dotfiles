@@ -108,6 +108,7 @@ if g:plugin_manager == 'plugged'
 	Plug 'mileszs/ack.vim'
 	Plug 'arcticicestudio/nord-vim'
 	Plug 'jnurmine/Zenburn' "Colorscheme that should be better for the eyes`
+	Plug 'darthmall/vim-vue' "vue file syntax highlighter
 	call plug#end()
 endif
 
@@ -128,6 +129,7 @@ endif
 " let g:pymode_folding = 0
 
 " jedi-vim config
+let g:jedi#auto_initialization = 0
 let g:jedi#goto_command = "<leader>pd"
 let g:jedi#goto_assignments_command = "<leader>pg"
 let g:jedi#goto_definitions_command = "<leader>pd"
@@ -135,6 +137,9 @@ let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<leader>pn"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>pr"
+" g:jedi#use_splits_not_buffers = 'rightbelow'
+" let g:jedi#use_tabs_not_buffers = 1
+
 
 " nerdtree config
 let g:NERDTreeWinPos = 'right'
@@ -162,7 +167,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_cache_dir = $HOME.'/.ctrlpcache'
 let g:ctrlp_clear_cache_on_exit = 0
 let g:ctrlp_extensions = ['tag', 'buffertag']
-nmap <C-O> :CtrlPBufTagAll<CR>
+" nmap <C-O> :CtrlPBufTagAll<CR>
 nmap <C-L> :CtrlPTag<CR>
 
 " airline config
@@ -197,7 +202,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 0
 let g:syntastic_tex_checkers=[]
 " let g:syntastic_check_on_wq = 0
@@ -299,7 +304,10 @@ au!
 autocmd BufRead,BufNewfile Vagrantfile set filetype=ruby
 autocmd FileType text setlocal textwidth=78
 autocmd FileType python call FourSpacesTabStop()
+autocmd FileType java call FourSpacesTabStop()
 autocmd FileType javascript call TwoSpacesTabStop()
+autocmd FileType html call TwoSpacesTabStop()
+autocmd FileType vue call TwoSpacesTabStop()
 autocmd FileType yaml call TwoSpacesTabStop()
 autocmd FileType json call TwoSpacesTabStop()
 autocmd FileType ruby call TwoSpacesTabStop()
