@@ -1,6 +1,14 @@
 [include]
 	path = ~/.gituser
+[color]
+	ui = auto
+[core]
+	pager = less -FMRiX
+	editor = vim
+[push]
+	default = simple
 [alias]
+	dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
 	co = checkout
 	br = branch
 	ci = commit
@@ -30,21 +38,9 @@
 	addi = add -i
 	addp = add -p
 	untracked = ls-files --others --exclude-standard
-
-[sendemail]
-	smtpserver = smtp.redhat.com
-[color]
-        ui = auto
-[core]
-        editor = vim
-
-[push]
-	default = simple
-
 [diff]
 	tool = meld
 	prompt = false
-
 [url "git@github.com:"]
 	pushInsteadOf = git://github.com/
 	pushInsteadOf = https://github.com/

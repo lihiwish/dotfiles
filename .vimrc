@@ -100,7 +100,7 @@ if g:plugin_manager == 'plugged'
 	Plug 'pangloss/vim-javascript'
 	Plug 'jelera/vim-javascript-syntax'
 	Plug 'scrooloose/syntastic'
-	Plug 'davidhalter/jedi-vim'
+	" Plug 'davidhalter/jedi-vim'
 	Plug 'bruno-/vim-man'
 "	Plug 'klen/python-mode'
 "	Plug 'rking/ag.vim'
@@ -109,6 +109,7 @@ if g:plugin_manager == 'plugged'
 	Plug 'arcticicestudio/nord-vim'
 	Plug 'jnurmine/Zenburn' "Colorscheme that should be better for the eyes`
 	Plug 'darthmall/vim-vue' "vue file syntax highlighter
+	Plug 'craigemery/vim-autotag'
 	call plug#end()
 endif
 
@@ -151,7 +152,7 @@ let g:tagbar_width = 40
 let g:tagbar_autofocus = 1
 let g:tagbar_compact = 1
 let g:tagbar_sort = 0
-let g:tagbar_ctags_bin = 'ctags'
+let g:tagbar_ctags_bin = '/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 nmap <F8> :TagbarToggle<CR>
 
 nmap <C-\> :cs find s <cword><CR>
@@ -273,7 +274,7 @@ set colorcolumn=80
 
 " Theme and fonts
 set background=dark
-set termguicolors
+" set termguicolors
 if has("gui_running")
 	if has("gui_gtk2")
 		set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
@@ -359,4 +360,5 @@ function! TabTabStop()
 endfunction
 
 set secure
+
 
