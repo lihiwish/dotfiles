@@ -110,6 +110,7 @@ if g:plugin_manager == 'plugged'
 	Plug 'jnurmine/Zenburn' "Colorscheme that should be better for the eyes`
 	Plug 'darthmall/vim-vue' "vue file syntax highlighter
 	Plug 'craigemery/vim-autotag'
+	Plug 'KeitaNakamura/neodark.vim' "Colorscheme similar to quantum with more options
 	call plug#end()
 endif
 
@@ -182,7 +183,7 @@ cnoreabbrev Ag Ack!
 cnoreabbrev AG Ack!
 
 if executable('ag')
-  let g:ackprg = 'agv --vimgrep'
+  let g:ackprg = 'ag --vimgrep'
 endif
 
 map <F4> :Ack <cword><cr>
@@ -274,19 +275,23 @@ set colorcolumn=80
 
 " Theme and fonts
 set background=dark
-" set termguicolors
+set termguicolors
 if has("gui_running")
 	if has("gui_gtk2")
 		set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11
 	elseif has("gui_win32")
 		set guifont=DejaVu_Sans_Mono_for_Powerline:h10:cANSI
+	else
+		let s:uname = system("uname")
+		if s:uname == "Darwin\n"
+			set guifont=Meslo\ LG\ S\ for\ Powerline:h14
+		endif
 	endif
 else
-	"let g:quantum_black=1
-	let g:quantum_italics=1
-	let g:airline_theme='quantum'
 endif
-"let g:solarized_termcolors=256
+"let g:quantum_black=1
+let g:quantum_italics=1
+let g:airline_theme='quantum'
 colorscheme quantum
 
 
