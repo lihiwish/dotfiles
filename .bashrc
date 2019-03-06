@@ -7,8 +7,9 @@ fi
 export PATH=$PATH:$HOME/.toolbox/bin:/usr/local/bin:/Applications/MacVim.app/Contents/bin
 
 # Bash completion
-if [ -f /etc/bash_completion ]; then
-. /etc/bash_completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  echo "trying to run bash_completions"
+. $(brew --prefix)/etc/bash_completion
 fi
 
 if [ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]; then
