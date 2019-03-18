@@ -39,7 +39,7 @@
 	addp = add -p
 	untracked = ls-files --others --exclude-standard
 	reb-orig = rebase -i origin/mainline
-	f-orig = fetch origin/mainline
+	f-orig = fetch origin mainline
 [diff]
 	tool = meld
 	prompt = false

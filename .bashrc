@@ -36,8 +36,18 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 coursera_home=/home/$USER/Projects/Private/data-manipulation-coursera
 alias hw-git='git --git-dir=$coursera_home/.git/ --work-tree=$coursera_home'
 
+alias mc='EDITOR=mvim mc'
+
+# Midnight commander: libffi is keg-only, which means it was not symlinked into /usr/local,
+# because some formulae require a newer version of libffi.
+# For compilers to find libffi you may need to set:
+export LDFLAGS="-L/usr/local/opt/libffi/lib"
+# For pkg-config to find libffi you may need to set:
+export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
+
 _completion_loader git; complete -o bashdefault -o default -o nospace -F _git hw-git
 _completion_loader git; complete -o bashdefault -o default -o nospace -F _git config
+_completion_loader git; complete -o bashdefault -o default -o nospace -F _git mc
 
 if [ -f ~/.bash_alias ]; then
 . ~/.bash_alias
