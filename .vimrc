@@ -46,7 +46,7 @@ set wildignore=*.o,*~,*.pyc,*.a,*.so,*.zip,*.rar,*.swp,*/tmp/*,*/vendor/*,*.exe,
 nnoremap <F10> :set invpaste paste?<CR>
 set pastetoggle=<F10>
 set showmode
-set clipboard^=unnamedplus
+set clipboard^=unnamed
 
 " Folds
 set foldmethod=marker
@@ -186,7 +186,7 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
-map <F4> :Ack <cword><cr>
+map <F4> :Ack! <cword><cr>
 
 let g:session_autoload = 'no'
 let g:session_autosave = 'no'
