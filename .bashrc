@@ -45,6 +45,16 @@ export LDFLAGS="-L/usr/local/opt/libffi/lib"
 # For pkg-config to find libffi you may need to set:
 export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 
+# Run this to fix tilda ~ location on mac
+# hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035},{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x700000064}]}'
+
+# Turns off bracketed paste mode: Fix weird paste signs when using mouse
+printf "\e[?2004l"
+
+# Show hidden files on finder
+# defaults write com.apple.Finder AppleShowAllFiles true
+# killall Finder
+
 _completion_loader git; complete -o bashdefault -o default -o nospace -F _git hw-git
 _completion_loader git; complete -o bashdefault -o default -o nospace -F _git config
 _completion_loader git; complete -o bashdefault -o default -o nospace -F _git mc
