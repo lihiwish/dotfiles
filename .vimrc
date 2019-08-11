@@ -109,8 +109,18 @@ if g:plugin_manager == 'plugged'
 	Plug 'arcticicestudio/nord-vim'
 	Plug 'jnurmine/Zenburn' "Colorscheme that should be better for the eyes`
 	Plug 'darthmall/vim-vue' "vue file syntax highlighter
+	Plug 'craigemery/vim-autotag'
+	Plug 'KeitaNakamura/neodark.vim' "Colorscheme similar to quantum with more options
+	Plug 'w0rp/ale'
+	" Plug 'iamcco/markdown-preview.vim'
+	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 	call plug#end()
 endif
+
+
+" markdown leader plugin
+"nnoremap <leader>m :MarkdownPreview<CR>
+
 
 " python-mode config
 " let g:pymode_rope = 0 " use jedi instead of rope
@@ -172,6 +182,26 @@ nmap <C-L> :CtrlPTag<CR>
 
 " airline config
 let g:airline_powerline_fonts = 1
+
+" ALE
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
+let g:ale_linters = {
+  \ 'python': ['flake8'] ,
+  \ }
+let g:ale_fixers = {
+  \ 'python': ['black', 'trim_whitespace', 'remove_trailing_lines', 'isort'] ,
+  \ 'markdown': ['prettier'],
+  \ }
+let g:ale_python_flake8_executable = 'flake8'
+let g:ale_warn_about_trailing_blank_lines = 1
+let g:ale_warn_about_trailing_whitespace = 1
+" let g:ale_python_black_auto_pipenv = 1
+let g:ale_python_black_executable = 'black'
+" let g:ale_python_black_use_global = 1
+
+
+
 
 " ag/ack configuration
 " let g:ackprg = 'ag --vimgrep --smart-case'
@@ -258,6 +288,11 @@ nnoremap <leader>vc :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") 
 	\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 nnoremap <leader>vx :echo synIDattr(synID(line("."),col("."),1),"name")<CR>
 nmap <leader>m <Plug>(Vman)
+" Navigate locationlist
+nnoremap <leader>al :lnext<CR>
+nnoremap <leader>ap :lprevious<CR>
+nnoremap <leader>ar :lrewind<CR>
+nnoremap <leader>lo :lopen<CR>
 
 " View
 set ruler		" show the cursor position all the time
@@ -269,7 +304,7 @@ set scrolloff=10
 syntax enable
 set cursorline
 set list lcs=trail:·,tab:»\ 
-set colorcolumn=80
+set colorcolumn=88
 
 " Theme and fonts
 set background=dark
@@ -313,7 +348,9 @@ autocmd FileType json call TwoSpacesTabStop()
 autocmd FileType ruby call TwoSpacesTabStop()
 autocmd FileType c,cpp setlocal cindent cinoptions=g-1
 autocmd FileType rst call FourSpacesTabStop()
-autocmd FileType markdown call FourSpacesTabStop()
+autocmd FileType markdown
+	\ call FourSpacesTabStop() |
+	\ set spell
 autocmd FileType gitcommit setlocal colorcolumn=50
 autocmd FileType dockerfile call FourSpacesTabStop()
 augroup END
