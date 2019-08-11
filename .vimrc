@@ -337,6 +337,7 @@ augroup END
 augroup DetectFileTypes
 au!
 autocmd BufRead,BufNewfile Vagrantfile set filetype=ruby
+autocmd BufRead,BufNewfile */cloudFormation/*.template set filetype=cloudformation
 autocmd FileType text setlocal textwidth=78
 autocmd FileType python call FourSpacesTabStop()
 autocmd FileType java call FourSpacesTabStop()
@@ -344,6 +345,9 @@ autocmd FileType javascript call TwoSpacesTabStop()
 autocmd FileType html call TwoSpacesTabStop()
 autocmd FileType vue call TwoSpacesTabStop()
 autocmd FileType yaml call TwoSpacesTabStop()
+autocmd FileType cloudformation
+	\ call TwoSpacesTabStop() |
+	\ set syntax=yaml
 autocmd FileType json call TwoSpacesTabStop()
 autocmd FileType ruby call TwoSpacesTabStop()
 autocmd FileType c,cpp setlocal cindent cinoptions=g-1
